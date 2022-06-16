@@ -27,8 +27,12 @@ const ResponseButton = styled.button`
     width : 55%;
     padding: 25px;
     font-size: 1.25rem;
-    margin: 30px;
+    margin: 20px;
+    border-radius:60px;
+    -webkit-box-shadow: 3px 6px 6px 5px rgba(0,0,0,0.38); 
+    box-shadow: 3px 6px 6px 5px rgba(0,0,0,0.38);
     &: hover{
         cursor: pointer;
+        background:#D5E7F0;
     }
 `

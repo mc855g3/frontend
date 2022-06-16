@@ -15,6 +15,8 @@ const flow = {
       { text: "Receber medicamento, fazer um teste, curativo ou outro procedimento", nextstate: 3},
       { text: "Consulta", nextstate: 4},
     ],
+    inputState: false,
+
   },
   2: 
   {
@@ -23,6 +25,7 @@ const flow = {
     options: [
       { text: "Retornar ao início.", nextstate: 0},
     ],
+    inputState: false,
   },
   3: 
   {
@@ -31,6 +34,8 @@ const flow = {
     options: [
       { text: "Retornar ao início.", nextstate: 0},
     ],
+    inputState: true,
+    nextStateAfterSubmit:0,
   },
   4: 
   {
@@ -41,6 +46,8 @@ const flow = {
       { text: "Esta consulta é um encaixe e você recebeu um email para estar aqui hoje.", nextstate: 6},
       { text: "Você não está agendado e nem recebeu um email , mas gostaria de se consultar hoje.", nextstate: 7},
     ],
+    inputState: false,
+
   },
   5: 
   {
@@ -51,6 +58,7 @@ const flow = {
       { text: "Especialidade 2.", nextstate: 3},
       { text: "Especialidade 3.", nextstate: 3},
     ],
+    inputState: false,
   },
   6: 
   {
@@ -59,6 +67,7 @@ const flow = {
     options: [
       { text: "Retornar ao início.", nextstate: 0},
     ],
+    inputState: false,
   },
   7: 
   {
@@ -67,6 +76,7 @@ const flow = {
     options: [
       { text: "Retornar ao início.", nextstate: 0},
     ],
+    inputState: false,
   },
 };
 
