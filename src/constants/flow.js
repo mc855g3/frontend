@@ -3,8 +3,8 @@ const flow = {
     question:
       "Olá! Bem vindo ao Ambulatório de Pediatria. Para nos ajudar a tornar seu atendimento mais ágil, escolha as opções corretas pra você.",
     options: [
-      { text: "Sou paciente HC Unicamp", nextstate: 1 },
-      { text: "Esta é a minha primeira Vez no HC Unicamp", nextstate: 0},
+      { text: "Já sou paciente HC Unicamp e possuo cadastro", nextstate: 1 },
+      { text: "Esta é a minha primeira Vez no HC Unicamp", nextstate: 8},
     ],
   },
   1: {
@@ -21,7 +21,7 @@ const flow = {
   2: 
   {
     question:
-      "Por favor se dirija à sala 23 a sua direita ; Em breve o atenderemos.",
+      "Por favor se dirija à sala 23. Em breve o atenderemos.",
     options: [
       { text: "Retornar ao início.", nextstate: 0},
     ],
@@ -52,7 +52,7 @@ const flow = {
   5: 
   {
     question:
-      "- Por favor diga em qual especialidade será sua consulta hoje: Aparece a lista de especialidade do período",
+      "- Por favor diga em qual especialidade será sua consulta hoje",
     options: [
       { text: "Especialidade 1.", nextstate: 3},
       { text: "Especialidade 2.", nextstate: 3},
@@ -72,12 +72,20 @@ const flow = {
   7: 
   {
     question:
-      "Por favor se dirija à sala 23 a sua direita. Em breve o atendermos e veremos se isto será possível",
+      "Por favor se dirija à sala 23. Em breve o atenderemos e veremos se isto será possível",
     options: [
       { text: "Retornar ao início.", nextstate: 0},
     ],
     inputState: false,
   },
+  8:{
+    question:
+      "Por favor se dirija à faixa amarela para que seu nome conste no sistema e possamos pedir exames e anotar sua consulta.Ao finalizar esse passo repita o processo para obter mais informações.",
+    options: [
+      { text: "Retornar ao início.", nextstate: 0},
+    ],
+    inputState: false,
+  }
 };
 
 export default flow;
