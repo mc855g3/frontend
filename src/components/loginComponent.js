@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import icon from '../images/logo.png'
 
 const LoginComponent = () => {
-    const [email, setEmail] = useState("");
+    const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submit", {email, password});
+        console.log("submit", {user, password});
         
     }
 
@@ -17,16 +17,16 @@ const LoginComponent = () => {
         <ContainerLogin>
             <WrapLogin>
             <LoginForm onSubmit={handleSubmit}>
-                
-                <ChatIcon src = {icon}/>
-
+                <WrapImg>
+                <LoginIcon src = {icon}/>
+                </WrapImg>
                 <WrapInput>
                 <LoginInput
-                    type="email"
-                    value={email}
-                    onChange = {(e) => setEmail(e.target.value)}
+                    type="user"
+                    value={user}
+                    onChange = {(e) => setUser(e.target.value)}
+                    placeholder = "User"
                 />
-                <FocusInput data-placeholder="Email"></FocusInput>
                 </WrapInput>
 
                 <WrapInput>
@@ -34,8 +34,8 @@ const LoginComponent = () => {
                     type="password"
                     value={password}
                     onChange = {(e) => setPassword(e.target.value)}
+                    placeholder = "Password"
                 />
-                <FocusInput data-placeholder="Password"></FocusInput>
                 </WrapInput>
 
                 <FormButton>
@@ -55,7 +55,6 @@ const ContainerExterno = styled.div` #Container
     
 `
 const ContainerLogin = styled.div` 
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -64,7 +63,7 @@ const ContainerLogin = styled.div`
     background-color: #0000;
 `
 const WrapLogin = styled.div` 
-    width: 390px;
+    width: 35rem;
     background-color: #f5f5f5;
     border-radius: 10px;
     padding: 77px 55px 33px 55px;
@@ -74,8 +73,9 @@ const LoginForm = styled.form`
 
 `
 
-const ChatIcon = styled.img` 
-    width: 10rem;
+const LoginIcon = styled.img`
+    width: 12rem;
+    height: 12rem;
 `
 const WrapInput = styled.div` 
     position: relative;
@@ -83,33 +83,21 @@ const WrapInput = styled.div`
     margin-bottom: 37px;
 `
 const LoginInput = styled.input` 
-    font-size: 15px;
+    font-size: 1.25rem;
     color: #000;
     line-height: 1.2;
     border: none;
-    display: block;
+    display: inline;
     width: 100%;
     height: 45px;
     background-color: transparent;
     padding: 0 5px;
 `
-const FocusInput = styled.span` 
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    top: 10px;
-    left: 0;
-    pointer-events: none;
-    color: #adadad;
-    &:before {
-        content: attr(data-placeholder);
-        height: 2px;
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
+const WrapImg = styled.div` 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 20px;
 `
 
 const FormButton = styled.div` 
