@@ -18,7 +18,7 @@ const TopBarArea = styled.div`
     align-items: center;
     justify-content: center;
     background: #2BA4E2;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
     @media (max-width: 500px) {
         margin-bottom: 2.5rem;
     } 
