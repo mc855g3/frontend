@@ -1,62 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from 'styled-components';
 import ItemPacient from '../components/itemPacient.js';
 import PacientCounter from '../components/totalPacientCounter.js';
 import TopBar from '../components/topBar.js';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import PacientGraph from '../components/pacientData.js';
+import { API_BASE } from '../constants/constants.js';
 const QueuePage = () => {
-    const [data, setData] = useState([
-        {
-            "hc": "123123",
-            "arrived_timestamp": "2022-07-08T20:07:19.006Z" 
-        },
-        {
-            "hc": "245666",
-            "arrived_timestamp": "2022-07-08T19:39:50.558Z"
-        },
-        {
-            "hc": "345543",
-            "arrived_timestamp": "2022-07-08T19:09:50.558Z"
-        },
-        {
-            "hc": "321451",
-            "arrived_timestamp": "2022-07-08T18:25:29.558Z"
-        }
+    const [data, setData] = useState([        
     ]);
 
-    const handleDelete = (hc) => {
-
-        //TODO: change to work with backend
-
-        const new_data = data.filter((item) => {
-            return item["hc"]!==hc
+    const getApiData = async () =>{
+        const response = await fetch(`${API_BASE}/queue`,{
+            method:"GET"
         })
-        setData(new_data)
+        const data= await response.json()
+        setData(data)
+    }
+    
+
+    useEffect(()=>{
+        getApiData()
+    },[])
+    
+    
+
+
+    const handleDelete = async (hc) => {
+
+
+        const response = await fetch(`${API_BASE}/pacient/${hc}`,{
+            method:"DELETE",
+        })
+        const data= await response.json()
+        setData(data)
     }
 
     const handleRefresh = () => {
-
-            //TODO: change to work with backend
-
-            const new_data = [{
-                "hc": "123123",
-                "arrived_timestamp": "2022-07-08T20:07:19.006Z" 
-            },
-            {
-                "hc": "245666",
-                "arrived_timestamp": "2022-07-08T19:26:50.558Z"
-            },
-            {
-                "hc": "345543",
-                "arrived_timestamp": "2022-06-08T16:15:21.558Z"
-            },
-            {
-                "hc": "321451",
-                "arrived_timestamp": "2022-07-08T18:25:29.558Z"
-            }
-        ]
-        setData(new_data)
+        getApiData()
     }
 
     return (

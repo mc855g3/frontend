@@ -6,11 +6,10 @@ const ItemPacient = ({hc,arrived_timestamp, handleDelete}) => {
 
   const currentDate= new Date();
 
-  const arrivedDate= new Date(arrived_timestamp);
+  const arrivedDate= new Date(arrived_timestamp+"Z");
 
   let ellapsedTime = (currentDate.getTime() - arrivedDate.getTime())/1000;
   let unity="segundos"
-  console.log("ini",ellapsedTime)
 
   if (ellapsedTime > 60){
     unity="minutos"
