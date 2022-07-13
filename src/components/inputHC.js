@@ -1,19 +1,27 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-
+import { API_BASE } from '../constants/constants';
 const InputHC = (attrs) => {
 
   const { register, handleSubmit } = useForm();
 
   const checkAccept = async (data) => {
-    console.log(data.HC_input)
     // TODO: make api request
+    const form_data = new FormData()
+
+    form_data.append("hc",data.hc_input)
+
+    const response= await fetch(`${API_BASE}/pacient`, {
+      method: "POST",
+      body: form_data,
+    })
+    console.log(response.json())
     attrs.updateFunction(attrs.stateUponSubmit)
   }
   return (
     <InputForm onSubmit={handleSubmit(checkAccept)}>
-        <InputComponent required placeholder='Seu HC' {...register('HC_input')}/>
+        <InputComponent required placeholder='Seu HC' {...register('hc_input')}/>
         <ResponseButton type='submit'>Enviar</ResponseButton>
     </InputForm>
   )

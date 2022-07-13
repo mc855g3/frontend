@@ -7,7 +7,7 @@ const PacientGraph = ({pacient_data}) => {
     const dist=pacient_data.reduce((acc,pacient)=>{
         const currentDate= new Date();
 
-        const arrivedDate= new Date(pacient["arrived_timestamp"]); 
+        const arrivedDate= new Date(pacient["arrived_timestamp"]+"Z"); 
 
         let ellapsedTime = (currentDate.getTime() - arrivedDate.getTime())/(1000*60);
 

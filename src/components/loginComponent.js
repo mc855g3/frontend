@@ -1,15 +1,17 @@
 import React, {useState} from 'react'
 import styled from 'styled-components';
 import icon from '../images/logo.png'
+import {useNavigate} from 'react-router-dom'
 
 const LoginComponent = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
+
+    const history= useNavigate()
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submit", {user, password});
-        
+        history("/back")
     }
 
     return (
