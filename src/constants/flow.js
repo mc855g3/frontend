@@ -54,9 +54,11 @@ const flow = {
     question:
       "- Por favor diga em qual especialidade será sua consulta hoje",
     options: [
-      { text: "Especialidade 1.", nextstate: 3},
-      { text: "Especialidade 2.", nextstate: 3},
-      { text: "Especialidade 3.", nextstate: 3},
+      { text: "Medicina do Adolescente.", nextstate: 3},
+      { text: "Cardiologia Ped.", nextstate: 3},
+      { text: "Endocrinologia Ped", nextstate: 3},
+      { text: "Gastroenterologia Ped", nextstate: 3},
+      { text: "Triagem Mucoviscidose", nextstate: 3},
     ],
     inputState: false,
   },
