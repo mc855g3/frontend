@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import ItemPacient from '../components/itemPacient.js';
 import PacientCounter from '../components/totalPacientCounter.js';
@@ -6,13 +6,24 @@ import TopBar from '../components/topBar.js';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import PacientGraph from '../components/pacientData.js';
 import { API_BASE } from '../constants/constants.js';
+import AuthContext from '../context/authContext.js';
+import { useNavigate } from 'react-router';
 const QueuePage = () => {
     const [data, setData] = useState([        
     ]);
 
+    const {authString} = useContext(AuthContext)
+    const history=useNavigate()
+
+    console.log(authString)
+    if(!authString){
+        history("/login")
+        
+    }
     const getApiData = async () =>{
-        const response = await fetch(`${API_BASE}/queue`,{
-            method:"GET"
+        const response = await fetch(`${API_BASE}/patient`,{
+            method:"GET",
+            headers: {"Authorization": `Basic ${authString}`}
         })
         const data= await response.json()
         setData(data)
@@ -29,11 +40,11 @@ const QueuePage = () => {
     const handleDelete = async (hc) => {
 
 
-        const response = await fetch(`${API_BASE}/pacient/${hc}`,{
+        const response = await fetch(`${API_BASE}/patient/${hc}`,{
             method:"DELETE",
+            headers: {"Authorization": `Basic ${authString}`}
         })
-        const data= await response.json()
-        setData(data)
+        getApiData()
     }
 
     const handleRefresh = () => {
