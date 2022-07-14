@@ -1,17 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import styled from 'styled-components';
 import icon from '../images/logo.png'
 import {useNavigate} from 'react-router-dom'
-
+import AuthContext from '../context/authContext';
+import { API_BASE } from '../constants/constants';
+import {Buffer} from 'buffer';
 const LoginComponent = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
 
+    const { setAuthString }=useContext(AuthContext)
     const history= useNavigate()
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        history("/back")
+        const authString= Buffer.from(`${user}:${password}`).toString("base64")
+        console.log(authString)
+        const response = await fetch(`${API_BASE}`,{
+            method: "GET",
+            headers: {"Authorization": `Basic ${authString}`}
+        } )
+        if (response.status === 200){
+            setAuthString(authString)
+            history("/back")
+        }else{
+            alert("Senha ou Usuario incorretos")
+        }
     }
 
     return (
@@ -24,7 +38,7 @@ const LoginComponent = () => {
                 </WrapImg>
                 <WrapInput>
                 <LoginInput
-                    type="user"
+                    type="Usuario"
                     value={user}
                     onChange = {(e) => setUser(e.target.value)}
                     placeholder = "User"
@@ -36,7 +50,7 @@ const LoginComponent = () => {
                     type="password"
                     value={password}
                     onChange = {(e) => setPassword(e.target.value)}
-                    placeholder = "Password"
+                    placeholder = "Senha"
                 />
                 </WrapInput>
 

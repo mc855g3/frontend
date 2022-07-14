@@ -1,24 +1,60 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { API_BASE } from '../constants/constants';
 const InputHC = (attrs) => {
 
+  const [lat,setLat] = useState(null)
+  const [long,setLong] = useState(null)
+  const [status,setStatus] = useState()
+
+  const ask_for_geolocation= () =>{
+    if (!lat || !long)
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        console.log(position.coords.latitude,position.coords.latitude)
+        setLat(position.coords.latitude)
+        setLong(position.coords.longitude)
+        setStatus("allowed")
+      },function(error) {
+        alert("Nos precisamos da sua localização para verificar se você realmente esta nas proximidades do HC. Você precisara liberar a permissão de geolocalização para continuar.");
+        setStatus("not allowed")
+      })
+  }
+
   const { register, handleSubmit } = useForm();
 
   const checkAccept = async (data) => {
-    // TODO: make api request
-    const form_data = new FormData()
 
-    form_data.append("hc",data.hc_input)
+    if (status!=="allowed"){
+      alert("Você precisa permitir o site pegar sua localização para continuar")
+      ask_for_geolocation()
+      return 
+    }
+    
+    if (!lat || !long){
+      alert("Estamos recuperando sua localização, por favor tente novamente em alguns segundos")
+      return 
+    }
 
-    const response= await fetch(`${API_BASE}/pacient`, {
+    const body = {
+      "hc":data.hc_input,
+      "lat":lat,
+      "long":long,
+    }
+
+    const response= await fetch(`${API_BASE}/patient`, {
       method: "POST",
-      body: form_data,
+      headers: {"Content-type":"application/json"},
+      body: JSON.stringify(body),
     })
-    console.log(response.json())
     attrs.updateFunction(attrs.stateUponSubmit)
   }
+  
+  useEffect(()=>{
+    ask_for_geolocation()
+  })
+
   return (
     <InputForm onSubmit={handleSubmit(checkAccept)}>
         <InputComponent required placeholder='Seu HC' {...register('hc_input')}/>
