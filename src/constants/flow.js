@@ -35,7 +35,7 @@ const flow = {
       { text: "Retornar ao início.", nextstate: 0},
     ],
     inputState: true,
-    nextStateAfterSubmit:0,
+    nextStateAfterSubmit:9,
   },
   4: 
   {
@@ -87,6 +87,14 @@ const flow = {
       { text: "Retornar ao início.", nextstate: 0},
     ],
     inputState: false,
+  },
+  9:{
+      question:
+        "Já fomos notificados da sua chegada. Por favor retire uma senha na recepção, em breve o atenderemos.",
+      options: [
+        { text: "Retornar ao início.", nextstate: 0},
+      ],
+      inputState: false,
   }
 };
 
