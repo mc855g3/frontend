@@ -35,7 +35,7 @@ const QueuePage = () => {
 
             const interval=setInterval(()=>{
                 getApiData()
-            },10000)
+            },5000)
 
 
             return ()=>clearInterval(interval)
