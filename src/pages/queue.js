@@ -31,10 +31,17 @@ const QueuePage = () => {
     
 
     useEffect(()=>{
-        getApiData()
+            getApiData()
+
+            const interval=setInterval(()=>{
+                getApiData()
+            },10000)
+
+
+            return ()=>clearInterval(interval)
     },[])
     
-    
+
 
 
     const handleDelete = async (hc) => {
