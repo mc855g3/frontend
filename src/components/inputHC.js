@@ -58,7 +58,7 @@ const InputHC = (attrs) => {
   return (
     <InputForm onSubmit={handleSubmit(checkAccept)}>
         <InputComponent required placeholder='Seu HC' {...register('hc_input')}/>
-        <ResponseButton type='submit'>Enviar</ResponseButton>
+        <ResponseButton disabled={(!lat || !long )? true : false} type='submit'>Enviar</ResponseButton>
     </InputForm>
   )
 }
@@ -88,8 +88,13 @@ const ResponseButton = styled.button`
     border-radius:60px;
     -webkit-box-shadow: 3px 6px 6px 5px rgba(0,0,0,0.38); 
     box-shadow: 3px 6px 6px 5px rgba(0,0,0,0.38);
-    &: hover{
+    &:hover{
         cursor: pointer;
         background:#D5E7F0;
     }
+    &:disabled{
+      cursor:not-allowed;
+      background:none;
+    }
+
 `

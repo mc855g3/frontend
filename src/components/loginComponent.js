@@ -21,6 +21,7 @@ const LoginComponent = () => {
             headers: {"Authorization": `Basic ${authString}`}
         } )
         if (response.status === 200){
+            localStorage.setItem("mc855Auth", authString);
             setAuthString(authString)
             history("/back")
         }else{

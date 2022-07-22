@@ -4,7 +4,17 @@
  import React, { createContext, useState, useEffect } from 'react';
  
  export const AuthProvider = ({ children }) => {
-   const [authString, setAuthString] = useState(null);
+   const [authString, setAuthString] = useState(() => {
+    // Gets token from the localStorage
+    const authString = localStorage.getItem("mc855Auth");
+
+    if (authString) {
+      // Return if found on localStorage
+      return authString;
+    }
+
+    return null;
+  });
  
    const providerValue = {
     authString,
